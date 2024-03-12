@@ -17,7 +17,7 @@ export class Provinsi {
         collation: 'utf8mb4_unicode_ci',
         default: () => 'NULL',
     })
-    name: string;
+    nama: string;
 
     @CreateDateColumn({
         type: 'timestamp',

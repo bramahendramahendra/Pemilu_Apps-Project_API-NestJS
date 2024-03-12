@@ -108,3 +108,13 @@ nest g service [name_file] --no-spec
 npm install --save @nestjs/typeorm typeorm mysql2
 ```
 
+## install Validation :
+```bash
+npm i --save class-validator class-transformer
+```
+
+## install Validation :
+```bash
+npm install --save @nestjs/mapped-types
+```
+
