@@ -100,8 +100,5 @@ nest g service [name_file] --no-spec
 
 ## install database :
 ```bash
-# with spec
-nest g service [name_file]
-# no spec
-nest g service [name_file] --no-spec
+npm install --save @nestjs/typeorm typeorm mysql2
 ```
