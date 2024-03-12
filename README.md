@@ -71,4 +71,37 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
 # Pemilu_Apps-Project_API-NestJS
+
+## install module :
+
+```bash
+nest g module [name_file]
+```
+
+## install module :
+
+```bash
+# with spec
+nest g controller [name_file]
+# no spec
+nest g controller [name_file] --no-spec
+```
+
+## install module :
+
+```bash
+# with spec
+nest g service [name_file]
+# no spec
+nest g service [name_file] --no-spec
+```
+
+## install database :
+```bash
+# with spec
+nest g service [name_file]
+# no spec
+nest g service [name_file] --no-spec
+```
