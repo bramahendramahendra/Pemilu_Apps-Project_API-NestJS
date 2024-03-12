@@ -74,6 +74,11 @@ Nest is [MIT licensed](LICENSE).
 
 # Pemilu_Apps-Project_API-NestJS
 
+## install config :
+```bash
+npm i --save @nestjs/config
+```
+
 ## install module :
 
 ```bash
@@ -102,3 +107,4 @@ nest g service [name_file] --no-spec
 ```bash
 npm install --save @nestjs/typeorm typeorm mysql2
 ```
+
