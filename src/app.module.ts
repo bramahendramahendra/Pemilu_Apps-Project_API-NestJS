@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { ProvinsiModule } from './provinsi/provinsi.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { KabupatenModule } from './kabupaten/kabupaten.module';
+import { KecamatanModule } from './kecamatan/kecamatan.module';
+import { KelurahanModule } from './kelurahan/kelurahan.module';
+import { TpsModule } from './tps/tps.module';
 
 
 @Module({
@@ -23,7 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }), 
-    ProvinsiModule
+    ProvinsiModule, KabupatenModule, KecamatanModule, KelurahanModule, TpsModule
   ],
   controllers: [AppController],
   providers: [AppService],

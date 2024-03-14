@@ -1,12 +1,19 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Kabupaten } from "src/kabupaten/kabupaten.entity";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity('provinsi')
-export class Provinsi {
+@Entity('kecamatan')
+export class Kecamatan {
     @PrimaryGeneratedColumn({
         type: 'int',
         unsigned: true,
     })
     id: number;
+
+    @Column({ 
+        type: 'int', 
+        unsigned: true 
+    })
+    id_kabupaten: number;
 
     @Column({
         type: 'varchar',
@@ -14,7 +21,7 @@ export class Provinsi {
         charset: 'utf8mb4',
         collation: 'utf8mb4_unicode_ci',
         nullable: true,
-        default: null
+        default: null 
     })
     nama: string;
 
@@ -33,4 +40,8 @@ export class Provinsi {
         default: () => 'NULL',
     })
     updated_at: Date;
+
+    @ManyToOne(() => Kabupaten, kabupaten => kabupaten.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
+    @JoinColumn({ name: 'id_kabupaten' })
+    kabupaten: Kabupaten;
 }
