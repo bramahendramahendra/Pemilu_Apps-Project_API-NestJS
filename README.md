@@ -118,3 +118,8 @@ npm i --save class-validator class-transformer
 npm install --save @nestjs/mapped-types
 ```
 
+## install Open API (SWAGGER) :
+```bash
+npm install --save @nestjs/swagger  
+```
+

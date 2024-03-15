@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, U
 import { ProvinsiService } from './provinsi.service';
 import { CreateProvinsiDto } from './dto/create-provinsi.dto';
 import { UpdateProvinsiDto } from './dto/update-provinsi.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('provinsi')
 @Controller('provinsi')
 export class ProvinsiController {
     constructor(private readonly provinsiService: ProvinsiService) { }
