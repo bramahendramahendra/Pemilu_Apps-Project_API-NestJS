@@ -14,9 +14,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   const customOptions = {
     customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
-    customJs: 'https://petstore.swagger.io/swagger-ui-bundle.js',
-    customJsUrl: 'https://petstore.swagger.io/swagger-ui-standalone-preset.js',
-    // customCssUrl4: 'https://petstore.swagger.io/swagger-initializer.js',
+    // customJs: 'https://petstore.swagger.io/swagger-ui-bundle.js',
+    // customJsUrl: 'https://petstore.swagger.io/swagger-ui-standalone-preset.js',
+    customJs: 'https://petstore.swagger.io/swagger-initializer.js',
     // customCssUrl5: 'https://petstore.swagger.io/index.css',
     // customCssUrl6: 'https://petstore.swagger.io/swagger-ui.css',
   };
