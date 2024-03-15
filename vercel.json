@@ -8,6 +8,18 @@
     ],
     "routes": [
         {
+            "src": "/swagger-ui/(.*)",
+            "dest": "/swagger-ui/$1",
+            "continue": true
+        },
+        {
+            "src": "/api/(.*)",
+            "dest": "dist/main.js",
+            "methods": [
+                "GET"
+            ]
+        },
+        {
             "src": "/(.*)",
             "dest": "dist/main.js",
             "methods": [
