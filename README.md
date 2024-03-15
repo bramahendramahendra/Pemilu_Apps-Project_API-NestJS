@@ -118,8 +118,14 @@ npm i --save class-validator class-transformer
 npm install --save @nestjs/mapped-types
 ```
 
+# Install Support
+
 ## install Open API (SWAGGER) :
 ```bash
 npm install --save @nestjs/swagger  
 ```
 
+## install Prisma :
+```bash
+ npm install prisma --save-dev
+```
