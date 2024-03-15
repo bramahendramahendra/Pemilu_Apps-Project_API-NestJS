@@ -12,7 +12,10 @@ async function bootstrap() {
     // .addTag()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  const customOptions = {
+    customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
+  };
+  SwaggerModule.setup('api', app, document, customOptions);
 
   await app.listen(3000);
 }

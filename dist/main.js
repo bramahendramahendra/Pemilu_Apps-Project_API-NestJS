@@ -11,7 +11,10 @@ async function bootstrap() {
         .setVersion('1.0')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api', app, document);
+    const customOptions = {
+        customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
+    };
+    swagger_1.SwaggerModule.setup('api', app, document, customOptions);
     await app.listen(3000);
 }
 bootstrap();
