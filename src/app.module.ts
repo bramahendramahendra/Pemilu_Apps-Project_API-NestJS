@@ -8,6 +8,9 @@ import { KabupatenModule } from './kabupaten/kabupaten.module';
 import { KecamatanModule } from './kecamatan/kecamatan.module';
 import { KelurahanModule } from './kelurahan/kelurahan.module';
 import { TpsModule } from './tps/tps.module';
+import { KandidatModule } from './kandidat/kandidat.module';
+import { PartaiModule } from './partai/partai.module';
+import { SaksiModule } from './saksi/saksi.module';
 
 
 @Module({
@@ -27,7 +30,7 @@ import { TpsModule } from './tps/tps.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }), 
-    ProvinsiModule, KabupatenModule, KecamatanModule, KelurahanModule, TpsModule
+    ProvinsiModule, KabupatenModule, KecamatanModule, KelurahanModule, TpsModule, KandidatModule, PartaiModule, SaksiModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -17,7 +17,8 @@ export class TPS {
 
     @Column({ 
         type: 'varchar', 
-        length: 25, charset: 'utf8mb4', 
+        length: 25, 
+        charset: 'utf8mb4', 
         collation: 'utf8mb4_unicode_ci', 
         nullable: true, 
         default: null 
@@ -28,7 +29,8 @@ export class TPS {
         type: 'text', 
         charset: 'utf8mb4', 
         collation: 'utf8mb4_unicode_ci', 
-        nullable: true 
+        nullable: true,
+        default: null
     })
     alamat: string;
 

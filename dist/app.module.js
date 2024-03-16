@@ -17,6 +17,9 @@ const kabupaten_module_1 = require("./kabupaten/kabupaten.module");
 const kecamatan_module_1 = require("./kecamatan/kecamatan.module");
 const kelurahan_module_1 = require("./kelurahan/kelurahan.module");
 const tps_module_1 = require("./tps/tps.module");
+const kandidat_module_1 = require("./kandidat/kandidat.module");
+const partai_module_1 = require("./partai/partai.module");
+const saksi_module_1 = require("./saksi/saksi.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -37,7 +40,7 @@ exports.AppModule = AppModule = __decorate([
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: process.env.DB_SYNCHRONIZE === 'true',
             }),
-            provinsi_module_1.ProvinsiModule, kabupaten_module_1.KabupatenModule, kecamatan_module_1.KecamatanModule, kelurahan_module_1.KelurahanModule, tps_module_1.TpsModule
+            provinsi_module_1.ProvinsiModule, kabupaten_module_1.KabupatenModule, kecamatan_module_1.KecamatanModule, kelurahan_module_1.KelurahanModule, tps_module_1.TpsModule, kandidat_module_1.KandidatModule, partai_module_1.PartaiModule, saksi_module_1.SaksiModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

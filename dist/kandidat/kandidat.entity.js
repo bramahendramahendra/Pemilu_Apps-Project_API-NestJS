@@ -9,26 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TPS = void 0;
-const kelurahan_entity_1 = require("../kelurahan/kelurahan.entity");
+exports.Kandidat = void 0;
+const partai_entity_1 = require("../partai/partai.entity");
 const typeorm_1 = require("typeorm");
-let TPS = class TPS {
+let Kandidat = class Kandidat {
 };
-exports.TPS = TPS;
+exports.Kandidat = Kandidat;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({
         type: 'int',
         unsigned: true
     }),
     __metadata("design:type", Number)
-], TPS.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)({
-        type: 'int',
-        unsigned: true
-    }),
-    __metadata("design:type", Number)
-], TPS.prototype, "id_kelurahan", void 0);
+], Kandidat.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'varchar',
@@ -39,7 +32,37 @@ __decorate([
         default: null
     }),
     __metadata("design:type", String)
-], TPS.prototype, "nama", void 0);
+], Kandidat.prototype, "nama", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'varchar',
+        length: 2000,
+        charset: 'utf8mb4',
+        collation: 'utf8mb4_unicode_ci',
+        nullable: true,
+        default: null
+    }),
+    __metadata("design:type", String)
+], Kandidat.prototype, "foto", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'varchar',
+        length: 191,
+        charset: 'utf8mb4',
+        collation: 'utf8mb4_unicode_ci',
+        nullable: true,
+        default: null
+    }),
+    __metadata("design:type", String)
+], Kandidat.prototype, "foto_mime", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'int',
+        nullable: true,
+        default: null
+    }),
+    __metadata("design:type", Number)
+], Kandidat.prototype, "foto_size", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'text',
@@ -49,16 +72,23 @@ __decorate([
         default: null
     }),
     __metadata("design:type", String)
-], TPS.prototype, "alamat", void 0);
+], Kandidat.prototype, "biografi", void 0);
+__decorate([
+    (0, typeorm_1.Column)({
+        type: 'int',
+        unsigned: true
+    }),
+    __metadata("design:type", partai_entity_1.Partai)
+], Kandidat.prototype, "id_partai", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamp',
         precision: 6,
         nullable: true,
-        default: () => 'CURRENT_TIMESTAMP(6)',
+        default: () => 'CURRENT_TIMESTAMP(6)'
     }),
     __metadata("design:type", Date)
-], TPS.prototype, "created_at", void 0);
+], Kandidat.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)({
         type: 'timestamp',
@@ -68,13 +98,13 @@ __decorate([
         onUpdate: 'CURRENT_TIMESTAMP(6)'
     }),
     __metadata("design:type", Date)
-], TPS.prototype, "updated_at", void 0);
+], Kandidat.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => kelurahan_entity_1.Kelurahan, kelurahan => kelurahan.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
-    (0, typeorm_1.JoinColumn)({ name: 'id_kelurahan' }),
-    __metadata("design:type", kelurahan_entity_1.Kelurahan)
-], TPS.prototype, "kelurahan", void 0);
-exports.TPS = TPS = __decorate([
-    (0, typeorm_1.Entity)('tps')
-], TPS);
-//# sourceMappingURL=tps.entity.js.map
+    (0, typeorm_1.ManyToOne)(() => partai_entity_1.Partai, (partai) => partai.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
+    (0, typeorm_1.JoinColumn)({ name: 'id_partai' }),
+    __metadata("design:type", partai_entity_1.Partai)
+], Kandidat.prototype, "partai", void 0);
+exports.Kandidat = Kandidat = __decorate([
+    (0, typeorm_1.Entity)('kandidat')
+], Kandidat);
+//# sourceMappingURL=kandidat.entity.js.map
