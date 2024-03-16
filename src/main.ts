@@ -62,8 +62,8 @@ async function bootstrap() {
   }));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new AnyExceptionFilter());
-  app.setGlobalPrefix('api');
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  // app.setGlobalPrefix('api');
+  // useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
 
   await app.listen(3000);
