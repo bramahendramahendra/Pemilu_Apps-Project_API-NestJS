@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { Kecamatan } from './kecamatan.entity';
 import { CreateKecamatanDto } from './dto/create-kecamatan.dto';
 import { UpdateKecamatanDto } from './dto/update-kecamatan.dto';
@@ -25,12 +25,24 @@ export class KecamatanService {
     }
 
     async create(createKecamatanDto: CreateKecamatanDto): Promise<Kecamatan> {
+        const existing = await this.kecamatanRepository.findOne({
+            where: { nama: createKecamatanDto.nama },
+        });
+        if (existing) {
+            throw new Error('Kecamatan name already exists');
+        }
         const kecamatan = this.kecamatanRepository.create(createKecamatanDto);
         await this.kecamatanRepository.save(kecamatan);
         return kecamatan;
     }
 
     async update(id: number, updateKecamatanDto: UpdateKecamatanDto): Promise<Kecamatan> {
+        const existing = await this.kecamatanRepository.findOne({
+            where: { nama: updateKecamatanDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Kecamatan name already exists');
+        }
         const kecamatan = await this.findOne(id);
         Object.assign(kecamatan, updateKecamatanDto);
         await this.kecamatanRepository.save(kecamatan);
@@ -38,9 +50,13 @@ export class KecamatanService {
     }
 
     async remove(id: number): Promise<void> {
-        const result = await this.kecamatanRepository.delete(id);
-        if (result.affected === 0) {
-            throw new NotFoundException(`Kecamatan with ID "${id}" not found`);
+        try {
+            await this.kecamatanRepository.delete(id);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                throw new Error('Cannot delete Kecamatan as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 }

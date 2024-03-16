@@ -3,7 +3,7 @@ import { TPS } from './tps.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTpsDto } from './dto/create-tps.dto';
 import { UpdateTpsDto } from './dto/update-tps.dto';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 
 @Injectable()
 export class TpsService {
@@ -25,12 +25,24 @@ export class TpsService {
     }
 
     async create(createTpsDto: CreateTpsDto): Promise<TPS> {
+        const existing = await this.tpsRepository.findOne({
+            where: { nama: createTpsDto.nama },
+        });
+        if (existing) {
+            throw new Error('Tps name already exists');
+        }
         const tps = this.tpsRepository.create(createTpsDto);
         await this.tpsRepository.save(tps);
         return tps;
     }
 
     async update(id: number, updateTpsDto: UpdateTpsDto): Promise<TPS> {
+        const existing = await this.tpsRepository.findOne({
+            where: { nama: updateTpsDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Tps name already exists');
+        }
         const tps = await this.findOne(id);
         Object.assign(tps, updateTpsDto);
         await this.tpsRepository.save(tps);
@@ -38,9 +50,13 @@ export class TpsService {
     }
 
     async remove(id: number): Promise<void> {
-        const result = await this.tpsRepository.delete(id);
-        if (result.affected === 0) {
-            throw new NotFoundException(`TPS with ID "${id}" not found`);
+        try { 
+            await this.tpsRepository.delete(id);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                throw new Error('Cannot delete Tps as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 }

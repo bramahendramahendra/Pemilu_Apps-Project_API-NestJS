@@ -32,20 +32,37 @@ let KecamatanService = class KecamatanService {
         return kecamatan;
     }
     async create(createKecamatanDto) {
+        const existing = await this.kecamatanRepository.findOne({
+            where: { nama: createKecamatanDto.nama },
+        });
+        if (existing) {
+            throw new Error('Kecamatan name already exists');
+        }
         const kecamatan = this.kecamatanRepository.create(createKecamatanDto);
         await this.kecamatanRepository.save(kecamatan);
         return kecamatan;
     }
     async update(id, updateKecamatanDto) {
+        const existing = await this.kecamatanRepository.findOne({
+            where: { nama: updateKecamatanDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Kecamatan name already exists');
+        }
         const kecamatan = await this.findOne(id);
         Object.assign(kecamatan, updateKecamatanDto);
         await this.kecamatanRepository.save(kecamatan);
         return kecamatan;
     }
     async remove(id) {
-        const result = await this.kecamatanRepository.delete(id);
-        if (result.affected === 0) {
-            throw new common_1.NotFoundException(`Kecamatan with ID "${id}" not found`);
+        try {
+            await this.kecamatanRepository.delete(id);
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                throw new Error('Cannot delete Kecamatan as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 };

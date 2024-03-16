@@ -32,20 +32,37 @@ let TpsService = class TpsService {
         return tps;
     }
     async create(createTpsDto) {
+        const existing = await this.tpsRepository.findOne({
+            where: { nama: createTpsDto.nama },
+        });
+        if (existing) {
+            throw new Error('Tps name already exists');
+        }
         const tps = this.tpsRepository.create(createTpsDto);
         await this.tpsRepository.save(tps);
         return tps;
     }
     async update(id, updateTpsDto) {
+        const existing = await this.tpsRepository.findOne({
+            where: { nama: updateTpsDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Tps name already exists');
+        }
         const tps = await this.findOne(id);
         Object.assign(tps, updateTpsDto);
         await this.tpsRepository.save(tps);
         return tps;
     }
     async remove(id) {
-        const result = await this.tpsRepository.delete(id);
-        if (result.affected === 0) {
-            throw new common_1.NotFoundException(`TPS with ID "${id}" not found`);
+        try {
+            await this.tpsRepository.delete(id);
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                throw new Error('Cannot delete Tps as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 };

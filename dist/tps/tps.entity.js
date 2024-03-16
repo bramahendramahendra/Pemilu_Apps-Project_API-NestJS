@@ -53,7 +53,7 @@ __decorate([
         type: 'timestamp',
         precision: 6,
         nullable: true,
-        default: () => 'NULL',
+        default: () => 'CURRENT_TIMESTAMP(6)',
     }),
     __metadata("design:type", Date)
 ], TPS.prototype, "created_at", void 0);
@@ -62,7 +62,8 @@ __decorate([
         type: 'timestamp',
         precision: 6,
         nullable: true,
-        default: () => 'NULL',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+        onUpdate: 'CURRENT_TIMESTAMP(6)'
     }),
     __metadata("design:type", Date)
 ], TPS.prototype, "updated_at", void 0);

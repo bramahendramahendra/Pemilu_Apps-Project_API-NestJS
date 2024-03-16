@@ -29,7 +29,7 @@ export class Kelurahan {
         type: 'timestamp',
         precision: 6,
         nullable: true,
-        default: () => 'NULL',
+        default: () => 'CURRENT_TIMESTAMP(6)',
     })
     created_at: Date;
 
@@ -37,7 +37,8 @@ export class Kelurahan {
         type: 'timestamp',
         precision: 6,
         nullable: true,
-        default: () => 'NULL',
+        default: () => 'CURRENT_TIMESTAMP(6)',
+        onUpdate: 'CURRENT_TIMESTAMP(6)'
     })
     updated_at: Date;
 

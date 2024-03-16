@@ -32,20 +32,37 @@ let KabupatenService = class KabupatenService {
         return kabupaten;
     }
     async create(createKabupatenDto) {
+        const existing = await this.kabupatenRepository.findOne({
+            where: { nama: createKabupatenDto.nama },
+        });
+        if (existing) {
+            throw new Error('Kabupaten name already exists');
+        }
         const kabupaten = this.kabupatenRepository.create(createKabupatenDto);
         await this.kabupatenRepository.save(kabupaten);
         return kabupaten;
     }
     async update(id, updateKabupatenDto) {
+        const existing = await this.kabupatenRepository.findOne({
+            where: { nama: updateKabupatenDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Kabupaten name already exists');
+        }
         const kabupaten = await this.findOne(id);
         Object.assign(kabupaten, updateKabupatenDto);
         await this.kabupatenRepository.save(kabupaten);
         return kabupaten;
     }
     async remove(id) {
-        const result = await this.kabupatenRepository.delete(id);
-        if (result.affected === 0) {
-            throw new common_1.NotFoundException(`Kabupaten with ID "${id}" not found`);
+        try {
+            await this.kabupatenRepository.delete(id);
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                throw new Error('Cannot delete Kabupaten as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 };

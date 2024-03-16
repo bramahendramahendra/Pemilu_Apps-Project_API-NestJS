@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Provinsi } from './provinsi.entity';
-import { Repository } from 'typeorm';
+import { QueryFailedError, Repository } from 'typeorm';
 import { CreateProvinsiDto } from './dto/create-provinsi.dto';
 import { UpdateProvinsiDto } from './dto/update-provinsi.dto';
 
@@ -25,12 +25,24 @@ export class ProvinsiService {
     }
 
     async create(createProvinsiDto: CreateProvinsiDto): Promise<Provinsi> {
+        const existing = await this.provinsiRepository.findOne({
+            where: { nama: createProvinsiDto.nama },
+        });
+        if (existing) {
+            throw new Error('Provinsi name already exists');
+        }
         const provinsi = this.provinsiRepository.create(createProvinsiDto);
         await this.provinsiRepository.save(provinsi);
         return provinsi;
     }
 
     async update(id: number, updateProvinsiDto: UpdateProvinsiDto): Promise<Provinsi> {
+        const existing = await this.provinsiRepository.findOne({
+            where: { nama: updateProvinsiDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Provinsi name already exists');
+        }
         const provinsi = await this.findOne(id);
         Object.assign(provinsi, updateProvinsiDto);
         await this.provinsiRepository.save(provinsi);
@@ -38,9 +50,14 @@ export class ProvinsiService {
     }
 
     async remove(id: number): Promise<void> {
-        const result = await this.provinsiRepository.delete(id);
-        if (result.affected === 0) {
-            throw new NotFoundException(`Provinsi with ID "${id}" not found`);
+        try {
+            await this.provinsiRepository.delete(id);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                throw new Error('Cannot delete Provinsi as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
+
 }

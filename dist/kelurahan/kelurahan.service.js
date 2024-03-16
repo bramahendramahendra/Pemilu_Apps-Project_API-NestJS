@@ -32,20 +32,37 @@ let KelurahanService = class KelurahanService {
         return kelurahan;
     }
     async create(createKelurahanDto) {
+        const existing = await this.kelurahanRepository.findOne({
+            where: { nama: createKelurahanDto.nama },
+        });
+        if (existing) {
+            throw new Error('Kelurahan name already exists');
+        }
         const kelurahan = this.kelurahanRepository.create(createKelurahanDto);
         await this.kelurahanRepository.save(kelurahan);
         return kelurahan;
     }
     async update(id, updateKelurahanDto) {
+        const existing = await this.kelurahanRepository.findOne({
+            where: { nama: updateKelurahanDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Kelurahan name already exists');
+        }
         const kelurahan = await this.findOne(id);
         Object.assign(kelurahan, updateKelurahanDto);
         await this.kelurahanRepository.save(kelurahan);
         return kelurahan;
     }
     async remove(id) {
-        const result = await this.kelurahanRepository.delete(id);
-        if (result.affected === 0) {
-            throw new common_1.NotFoundException(`Kelurahan with ID "${id}" not found`);
+        try {
+            await this.kelurahanRepository.delete(id);
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                throw new Error('Cannot delete Kelurahan as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 };

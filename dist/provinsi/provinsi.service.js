@@ -32,20 +32,37 @@ let ProvinsiService = class ProvinsiService {
         return provinsi;
     }
     async create(createProvinsiDto) {
+        const existing = await this.provinsiRepository.findOne({
+            where: { nama: createProvinsiDto.nama },
+        });
+        if (existing) {
+            throw new Error('Provinsi name already exists');
+        }
         const provinsi = this.provinsiRepository.create(createProvinsiDto);
         await this.provinsiRepository.save(provinsi);
         return provinsi;
     }
     async update(id, updateProvinsiDto) {
+        const existing = await this.provinsiRepository.findOne({
+            where: { nama: updateProvinsiDto.nama },
+        });
+        if (existing && existing.id !== id) {
+            throw new Error('Provinsi name already exists');
+        }
         const provinsi = await this.findOne(id);
         Object.assign(provinsi, updateProvinsiDto);
         await this.provinsiRepository.save(provinsi);
         return provinsi;
     }
     async remove(id) {
-        const result = await this.provinsiRepository.delete(id);
-        if (result.affected === 0) {
-            throw new common_1.NotFoundException(`Provinsi with ID "${id}" not found`);
+        try {
+            await this.provinsiRepository.delete(id);
+        }
+        catch (error) {
+            if (error instanceof typeorm_2.QueryFailedError) {
+                throw new Error('Cannot delete Provinsi as it is referenced by one or more districts');
+            }
+            throw error;
         }
     }
 };
