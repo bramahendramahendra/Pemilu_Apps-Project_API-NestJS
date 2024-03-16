@@ -6,6 +6,7 @@ const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const response_interceptor_1 = require("./common/interceptors/response.interceptor");
 const any_exception_filter_1 = require("./common/filters/any-exception.filter");
+const class_validator_1 = require("class-validator");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const config = new swagger_1.DocumentBuilder()
@@ -37,6 +38,8 @@ async function bootstrap() {
     }));
     app.useGlobalInterceptors(new response_interceptor_1.ResponseInterceptor());
     app.useGlobalFilters(new any_exception_filter_1.AnyExceptionFilter());
+    app.setGlobalPrefix('api');
+    (0, class_validator_1.useContainer)(app.select(app_module_1.AppModule), { fallbackOnErrors: true });
     await app.listen(3000);
 }
 bootstrap();

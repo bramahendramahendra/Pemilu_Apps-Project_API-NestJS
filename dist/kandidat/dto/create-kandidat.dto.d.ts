@@ -1,4 +1,8 @@
-export declare class CreateTpsDto {
+export declare class CreateKandidatDto {
     nama: string;
-    alamat: string;
+    foto?: string;
+    foto_mime?: string;
+    foto_size?: number;
+    biografi?: string;
+    id_partai: number;
 }

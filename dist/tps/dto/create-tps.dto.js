@@ -16,14 +16,20 @@ class CreateTpsDto {
 }
 exports.CreateTpsDto = CreateTpsDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'TPS 01' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'TPS 01',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 25),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)
 ], CreateTpsDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jl.Harsono RM No.1' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Jl.Harsono RM No.1',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateTpsDto.prototype, "alamat", void 0);

@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AnyExceptionFilter } from './common/filters/any-exception.filter';
+import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -46,7 +47,8 @@ async function bootstrap() {
   // useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   
-
+  // const cors = { ...CorsConfig };
+  // app.enableCors(cors);
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
@@ -58,9 +60,10 @@ async function bootstrap() {
       return new Error(messages.join('; '));
     },
   }));
-
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new AnyExceptionFilter());
+  app.setGlobalPrefix('api');
+  useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
 
   await app.listen(3000);
