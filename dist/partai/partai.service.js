@@ -22,12 +22,27 @@ let PartaiService = class PartaiService {
         this.partaiRepository = partaiRepository;
     }
     async findAll() {
-        return this.partaiRepository.find();
+        const partai = await this.partaiRepository.find();
+        if (!partai || partai.length === 0) {
+            throw new common_1.NotFoundException(`Partai not found`);
+        }
+        return partai;
     }
     async findOne(id) {
         const partai = await this.partaiRepository.findOneBy({ id });
         if (!partai) {
             throw new common_1.NotFoundException(`Partai with ID "${id}" not found`);
+        }
+        return partai;
+    }
+    async findAllBySearch(search) {
+        const queryBuilder = this.partaiRepository.createQueryBuilder('partai');
+        if (search) {
+            queryBuilder.andWhere('partai.nama LIKE :search OR partai.deskripsi LIKE :search', { search: `%${search}%` });
+        }
+        const partai = await queryBuilder.getMany();
+        if (!partai || partai.length === 0) {
+            throw new common_1.NotFoundException(`Partai not found`);
         }
         return partai;
     }

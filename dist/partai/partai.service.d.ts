@@ -7,6 +7,7 @@ export declare class PartaiService {
     constructor(partaiRepository: Repository<Partai>);
     findAll(): Promise<Partai[]>;
     findOne(id: number): Promise<Partai>;
+    findAllBySearch(search: string): Promise<Partai[]>;
     create(createPartaiDto: CreatePartaiDto): Promise<Partai>;
     update(id: number, updatePartaiDto: UpdatePartaiDto): Promise<Partai>;
     remove(id: number): Promise<void>;

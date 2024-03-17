@@ -13,13 +13,29 @@ export class PartaiService {
     ) { }
 
     async findAll(): Promise<Partai[]> {
-        return this.partaiRepository.find();
+        const partai = await this.partaiRepository.find();
+        if (!partai || partai.length === 0) {
+            throw new NotFoundException(`Partai not found`);
+        }
+        return partai;
     }
 
     async findOne(id: number): Promise<Partai> {
         const partai = await this.partaiRepository.findOneBy({ id });
         if (!partai) {
             throw new NotFoundException(`Partai with ID "${id}" not found`);
+        }
+        return partai;
+    }
+
+    async findAllBySearch(search: string): Promise<Partai[]> {
+        const queryBuilder = this.partaiRepository.createQueryBuilder('partai');
+        if (search) {
+            queryBuilder.andWhere('partai.nama LIKE :search OR partai.deskripsi LIKE :search', { search: `%${search}%` });
+        }
+        const partai = await queryBuilder.getMany();
+        if (!partai || partai.length === 0) {
+            throw new NotFoundException(`Partai not found`);
         }
         return partai;
     }
