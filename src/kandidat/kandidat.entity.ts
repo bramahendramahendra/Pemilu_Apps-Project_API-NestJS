@@ -59,7 +59,7 @@ export class Kandidat {
         type: 'int',
         unsigned: true
     })
-    id_partai: Partai;
+    id_partai: number;
 
     @CreateDateColumn({ 
         type: 'timestamp', 
@@ -78,7 +78,7 @@ export class Kandidat {
     })
     updated_at: Date;
 
-    @ManyToOne(() => Partai, (partai) => partai.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
+    @ManyToOne(() => Partai, partai => partai.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
     @JoinColumn({ name: 'id_partai' })
     partai: Partai;
 }

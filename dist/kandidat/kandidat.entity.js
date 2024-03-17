@@ -78,7 +78,7 @@ __decorate([
         type: 'int',
         unsigned: true
     }),
-    __metadata("design:type", partai_entity_1.Partai)
+    __metadata("design:type", Number)
 ], Kandidat.prototype, "id_partai", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
@@ -100,7 +100,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Kandidat.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => partai_entity_1.Partai, (partai) => partai.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
+    (0, typeorm_1.ManyToOne)(() => partai_entity_1.Partai, partai => partai.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
     (0, typeorm_1.JoinColumn)({ name: 'id_partai' }),
     __metadata("design:type", partai_entity_1.Partai)
 ], Kandidat.prototype, "partai", void 0);

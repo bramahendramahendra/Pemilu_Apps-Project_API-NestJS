@@ -3,7 +3,7 @@ import { CreateKandidatDto } from './create-kandidat.dto';
 import { IsInt, IsNumber, IsOptional, IsString, Length, MaxLength, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateTpsDto extends PartialType(CreateKandidatDto) {
+export class UpdateKandidatDto extends PartialType(CreateKandidatDto) {
     @ApiProperty({ 
         example: 'TPS 01',
         required: false

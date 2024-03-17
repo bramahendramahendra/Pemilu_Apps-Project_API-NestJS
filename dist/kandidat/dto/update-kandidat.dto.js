@@ -9,14 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTpsDto = void 0;
+exports.UpdateKandidatDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const create_kandidat_dto_1 = require("./create-kandidat.dto");
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
-class UpdateTpsDto extends (0, mapped_types_1.PartialType)(create_kandidat_dto_1.CreateKandidatDto) {
+class UpdateKandidatDto extends (0, mapped_types_1.PartialType)(create_kandidat_dto_1.CreateKandidatDto) {
 }
-exports.UpdateTpsDto = UpdateTpsDto;
+exports.UpdateKandidatDto = UpdateKandidatDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'TPS 01',
@@ -27,7 +27,7 @@ __decorate([
     (0, class_validator_1.Length)(1, 25),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "nama", void 0);
+], UpdateKandidatDto.prototype, "nama", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'https://example.com/photo.jpg',
@@ -36,7 +36,7 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "foto", void 0);
+], UpdateKandidatDto.prototype, "foto", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'image/jpeg',
@@ -46,7 +46,7 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.MaxLength)(191),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "foto_mime", void 0);
+], UpdateKandidatDto.prototype, "foto_mime", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 2048,
@@ -55,7 +55,7 @@ __decorate([
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], UpdateTpsDto.prototype, "foto_size", void 0);
+], UpdateKandidatDto.prototype, "foto_size", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'Updated biography of the candidate',
@@ -64,7 +64,7 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "biografi", void 0);
+], UpdateKandidatDto.prototype, "biografi", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 1,
@@ -75,5 +75,5 @@ __decorate([
     (0, class_validator_1.Min)(1),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
-], UpdateTpsDto.prototype, "id_partai", void 0);
+], UpdateKandidatDto.prototype, "id_partai", void 0);
 //# sourceMappingURL=update-kandidat.dto.js.map

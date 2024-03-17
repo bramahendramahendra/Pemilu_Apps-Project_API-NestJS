@@ -6,7 +6,7 @@ export declare class Kandidat {
     foto_mime: string;
     foto_size: number;
     biografi: string;
-    id_partai: Partai;
+    id_partai: number;
     created_at: Date;
     updated_at: Date;
     partai: Partai;
