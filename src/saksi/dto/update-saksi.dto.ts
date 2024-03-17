@@ -1,14 +1,46 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateTpsDto } from './create-saksi.dto';
-import { IsOptional } from 'class-validator';
+import { IsInt, IsNumber, IsOptional, IsString, Length, MaxLength, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { CreateSaksiDto } from './create-saksi.dto';
 
-export class UpdateTpsDto extends PartialType(CreateTpsDto) {
-    @ApiProperty({ example: 'TPS 01' })
+export class UpdateSaksiDto extends PartialType(CreateSaksiDto) {
+    @ApiProperty({
+        example: 'John Doe',
+        required: false
+    })
+    @IsString()
     @IsOptional()
+    @Length(1, 25)
+    @MaxLength(25)
     nama?: string;
 
-    @ApiProperty({ example: 'Jl.Harsono RM No.1' })
+    @ApiProperty({
+        example: '+621234567890',
+        required: false
+    })
+    @IsString()
     @IsOptional()
-    alamat?: string;
+    @Length(1, 15)
+    @MaxLength(15)
+    kontak?: string;
+
+    @ApiProperty({
+        example: 1,
+        required: false
+    })
+    @IsInt()
+    @IsNumber()
+    @Min(1)
+    @IsOptional()
+    id_tps?: number;
+
+    @ApiProperty({
+        example: 1,
+        required: false
+    })
+    @IsInt()
+    @IsNumber()
+    @Min(1)
+    @IsOptional()
+    id_kandidat?: number;
 }

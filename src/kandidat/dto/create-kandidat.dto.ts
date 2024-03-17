@@ -49,6 +49,7 @@ export class CreateKandidatDto {
         required: true
     })
     @IsInt()
+    @IsNumber()
     @Min(1)
     id_partai: number;
 }

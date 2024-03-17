@@ -22,46 +22,72 @@ let TpsController = class TpsController {
     constructor(tpsService) {
         this.tpsService = tpsService;
     }
-    create(createTpsDto) {
-        return this.tpsService.create(createTpsDto);
+    async findAll() {
+        return this.tpsService.findAll().catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findAll() {
-        return this.tpsService.findAll();
+    async search(search) {
+        return this.tpsService.findAllBySearch(search).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findOne(id) {
+    async findAllByKelurahan(id_kelurahan) {
+        return this.tpsService.findAllByKelurahan(id_kelurahan).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
+    }
+    async findOne(id) {
         return this.tpsService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    update(id, updateTpsDto) {
+    async create(createTpsDto) {
+        return this.tpsService.create(createTpsDto);
+    }
+    async update(id, updateTpsDto) {
         return this.tpsService.update(id, updateTpsDto);
     }
-    remove(id) {
+    async remove(id) {
         return this.tpsService.remove(id);
     }
 };
 exports.TpsController = TpsController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TpsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], TpsController.prototype, "search", null);
+__decorate([
+    (0, common_1.Get)('by-kelurahan/:id_kelurahan'),
+    __param(0, (0, common_1.Param)('id_kelurahan')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], TpsController.prototype, "findAllByKelurahan", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], TpsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_tps_dto_1.CreateTpsDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], TpsController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], TpsController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], TpsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
@@ -69,14 +95,14 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_tps_dto_1.UpdateTpsDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], TpsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], TpsController.prototype, "remove", null);
 exports.TpsController = TpsController = __decorate([
     (0, swagger_1.ApiTags)('tps'),

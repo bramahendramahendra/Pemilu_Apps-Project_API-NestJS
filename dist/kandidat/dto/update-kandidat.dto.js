@@ -29,33 +29,49 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'https://example.com/photo.jpg', required: false }),
+    (0, swagger_1.ApiProperty)({
+        example: 'https://example.com/photo.jpg',
+        required: false
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "foto", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'image/jpeg', required: false }),
+    (0, swagger_1.ApiProperty)({
+        example: 'image/jpeg',
+        required: false
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.MaxLength)(191),
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "foto_mime", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 2048, required: false }),
+    (0, swagger_1.ApiProperty)({
+        example: 2048,
+        required: false
+    }),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)
 ], UpdateTpsDto.prototype, "foto_size", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Updated biography of the candidate', required: false }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Updated biography of the candidate',
+        required: false
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "biografi", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 1, required: false }),
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
     (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(1),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Number)

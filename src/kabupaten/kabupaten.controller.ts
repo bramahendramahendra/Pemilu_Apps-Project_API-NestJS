@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { KabupatenService } from './kabupaten.service';
 import { CreateKabupatenDto } from './dto/create-kabupaten.dto';
 import { UpdateKabupatenDto } from './dto/update-kabupaten.dto';
@@ -9,32 +9,48 @@ import { ApiTags } from '@nestjs/swagger';
 export class KabupatenController {
     constructor(private readonly kabupatenService: KabupatenService) {}
 
-    @Post()
-    @UsePipes(new ValidationPipe({ transform: true }))
-    create(@Body() createKabupatenDto: CreateKabupatenDto) {
-        return this.kabupatenService.create(createKabupatenDto);
+    @Get()
+    async findAll() {
+        return this.kabupatenService.findAll().catch((e) => {
+            throw new NotFoundException(e.message);
+        });
     }
 
-    @Get()
-    findAll() {
-        return this.kabupatenService.findAll();
+    @Get('search')
+    async search(@Query('search') search: string) {
+        return this.kabupatenService.findAllBySearch(search).catch((e) => {
+            throw new NotFoundException(e.message);
+        });
+    }
+
+    @Get('by-provinsi/:id_provinsi')
+    async findAllByProvinsi(@Param('id_provinsi') id_provinsi: number) {
+        return this.kabupatenService.findAllByProvinsi(id_provinsi).catch((e) => {
+            throw new NotFoundException(e.message);
+        });
     }
 
     @Get(':id')
-    findOne(@Param('id') id: number) {
+    async findOne(@Param('id') id: number) {
         return this.kabupatenService.findOne(id).catch((e) => {
             throw new NotFoundException(e.message);
         });
     }
 
+    @Post()
+    @UsePipes(new ValidationPipe({ transform: true }))
+    async create(@Body() createKabupatenDto: CreateKabupatenDto) {
+        return this.kabupatenService.create(createKabupatenDto);
+    }
+
     @Patch(':id')
     @UsePipes(new ValidationPipe({ transform: true }))
-    update(@Param('id') id: number, @Body() updateKabupatenDto: UpdateKabupatenDto) {
+    async update(@Param('id') id: number, @Body() updateKabupatenDto: UpdateKabupatenDto) {
         return this.kabupatenService.update(id, updateKabupatenDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: number) {
+    async remove(@Param('id') id: number) {
         return this.kabupatenService.remove(id);
     }
 }

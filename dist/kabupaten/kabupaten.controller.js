@@ -22,46 +22,72 @@ let KabupatenController = class KabupatenController {
     constructor(kabupatenService) {
         this.kabupatenService = kabupatenService;
     }
-    create(createKabupatenDto) {
-        return this.kabupatenService.create(createKabupatenDto);
+    async findAll() {
+        return this.kabupatenService.findAll().catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findAll() {
-        return this.kabupatenService.findAll();
+    async search(search) {
+        return this.kabupatenService.findAllBySearch(search).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findOne(id) {
+    async findAllByProvinsi(id_provinsi) {
+        return this.kabupatenService.findAllByProvinsi(id_provinsi).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
+    }
+    async findOne(id) {
         return this.kabupatenService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    update(id, updateKabupatenDto) {
+    async create(createKabupatenDto) {
+        return this.kabupatenService.create(createKabupatenDto);
+    }
+    async update(id, updateKabupatenDto) {
         return this.kabupatenService.update(id, updateKabupatenDto);
     }
-    remove(id) {
+    async remove(id) {
         return this.kabupatenService.remove(id);
     }
 };
 exports.KabupatenController = KabupatenController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], KabupatenController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], KabupatenController.prototype, "search", null);
+__decorate([
+    (0, common_1.Get)('by-provinsi/:id_provinsi'),
+    __param(0, (0, common_1.Param)('id_provinsi')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KabupatenController.prototype, "findAllByProvinsi", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KabupatenController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_kabupaten_dto_1.CreateKabupatenDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KabupatenController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], KabupatenController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], KabupatenController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
@@ -69,14 +95,14 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_kabupaten_dto_1.UpdateKabupatenDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KabupatenController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KabupatenController.prototype, "remove", null);
 exports.KabupatenController = KabupatenController = __decorate([
     (0, swagger_1.ApiTags)('kabupaten'),

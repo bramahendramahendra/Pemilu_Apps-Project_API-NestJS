@@ -1,7 +1,9 @@
-import { CreateTpsDto } from './create-saksi.dto';
-declare const UpdateTpsDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateTpsDto>>;
-export declare class UpdateTpsDto extends UpdateTpsDto_base {
+import { CreateSaksiDto } from './create-saksi.dto';
+declare const UpdateSaksiDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateSaksiDto>>;
+export declare class UpdateSaksiDto extends UpdateSaksiDto_base {
     nama?: string;
-    alamat?: string;
+    kontak?: string;
+    id_tps?: number;
+    id_kandidat?: number;
 }
 export {};

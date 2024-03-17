@@ -27,6 +27,16 @@ __decorate([
 ], CreateTpsDto.prototype, "nama", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: true
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateTpsDto.prototype, "id_kelurahan", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         example: 'Jl.Harsono RM No.1',
         required: true
     }),

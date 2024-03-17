@@ -18,8 +18,25 @@ class UpdateKecamatanDto extends (0, mapped_types_1.PartialType)(create_kecamata
 }
 exports.UpdateKecamatanDto = UpdateKecamatanDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Pasar Minggu' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Pasar Minggu',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(25),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateKecamatanDto.prototype, "nama", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdateKecamatanDto.prototype, "id_kabupaten", void 0);
 //# sourceMappingURL=update-kecamatan.dto.js.map

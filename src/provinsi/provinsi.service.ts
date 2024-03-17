@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Provinsi } from './provinsi.entity';
-import { QueryFailedError, Repository } from 'typeorm';
+import { ILike, QueryFailedError, Repository } from 'typeorm';
 import { CreateProvinsiDto } from './dto/create-provinsi.dto';
 import { UpdateProvinsiDto } from './dto/update-provinsi.dto';
 
@@ -20,6 +20,18 @@ export class ProvinsiService {
         const provinsi = await this.provinsiRepository.findOneBy({ id });
         if (!provinsi) {
             throw new NotFoundException(`Provinsi with ID "${id}" not found`);
+        }
+        return provinsi;
+    }
+
+    async findAllBySearch(search?: string): Promise<Provinsi[]> {
+        const queryBuilder = this.provinsiRepository.createQueryBuilder('provinsi');
+        if (search) {
+            queryBuilder.andWhere('provinsi.nama LIKE :search', { search: `%${search}%` });
+        }
+        const provinsi = await queryBuilder.getMany();
+        if (!provinsi || provinsi.length === 0) {
+            throw new NotFoundException(`Provinsi not found`);
         }
         return provinsi;
     }

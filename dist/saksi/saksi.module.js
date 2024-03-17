@@ -10,11 +10,14 @@ exports.SaksiModule = void 0;
 const common_1 = require("@nestjs/common");
 const saksi_controller_1 = require("./saksi.controller");
 const saksi_service_1 = require("./saksi.service");
+const saksi_entity_1 = require("./saksi.entity");
+const typeorm_1 = require("@nestjs/typeorm");
 let SaksiModule = class SaksiModule {
 };
 exports.SaksiModule = SaksiModule;
 exports.SaksiModule = SaksiModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([saksi_entity_1.Saksi])],
         controllers: [saksi_controller_1.SaksiController],
         providers: [saksi_service_1.SaksiService]
     })

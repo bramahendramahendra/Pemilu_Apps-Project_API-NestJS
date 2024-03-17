@@ -7,6 +7,8 @@ export declare class KabupatenService {
     constructor(kabupatenRepository: Repository<Kabupaten>);
     findAll(): Promise<Kabupaten[]>;
     findOne(id: number): Promise<Kabupaten>;
+    findAllByProvinsi(id_provinsi: number): Promise<Kabupaten[]>;
+    findAllBySearch(search?: string): Promise<Kabupaten[]>;
     create(createKabupatenDto: CreateKabupatenDto): Promise<Kabupaten>;
     update(id: number, updateKabupatenDto: UpdateKabupatenDto): Promise<Kabupaten>;
     remove(id: number): Promise<void>;

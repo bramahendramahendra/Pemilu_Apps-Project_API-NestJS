@@ -22,46 +22,72 @@ let KelurahanController = class KelurahanController {
     constructor(kelurahanService) {
         this.kelurahanService = kelurahanService;
     }
-    create(createKelurahanDto) {
-        return this.kelurahanService.create(createKelurahanDto);
+    async findAll() {
+        return this.kelurahanService.findAll().catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findAll() {
-        return this.kelurahanService.findAll();
+    async search(search) {
+        return this.kelurahanService.findAllBySearch(search).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findOne(id) {
+    async findAllByKecamatan(id_kecamatan) {
+        return this.kelurahanService.findAllByKecamatan(id_kecamatan).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
+    }
+    async findOne(id) {
         return this.kelurahanService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    update(id, updateKelurahanDto) {
+    async create(createKelurahanDto) {
+        return this.kelurahanService.create(createKelurahanDto);
+    }
+    async update(id, updateKelurahanDto) {
         return this.kelurahanService.update(id, updateKelurahanDto);
     }
-    remove(id) {
+    async remove(id) {
         return this.kelurahanService.remove(id);
     }
 };
 exports.KelurahanController = KelurahanController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], KelurahanController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], KelurahanController.prototype, "search", null);
+__decorate([
+    (0, common_1.Get)('by-kecamatan/:id_kecamatan'),
+    __param(0, (0, common_1.Param)('id_kecamatan')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KelurahanController.prototype, "findAllByKecamatan", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KelurahanController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_kelurahan_dto_1.CreateKelurahanDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KelurahanController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], KelurahanController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], KelurahanController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
@@ -69,17 +95,17 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_kelurahan_dto_1.UpdateKelurahanDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KelurahanController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KelurahanController.prototype, "remove", null);
 exports.KelurahanController = KelurahanController = __decorate([
-    (0, swagger_1.ApiTags)('kecamatan'),
+    (0, swagger_1.ApiTags)('kelurahan'),
     (0, common_1.Controller)('kelurahan'),
     __metadata("design:paramtypes", [kelurahan_service_1.KelurahanService])
 ], KelurahanController);

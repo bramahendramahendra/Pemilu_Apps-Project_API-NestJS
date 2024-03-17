@@ -22,46 +22,60 @@ let ProvinsiController = class ProvinsiController {
     constructor(provinsiService) {
         this.provinsiService = provinsiService;
     }
-    create(createProvinsiDto) {
-        return this.provinsiService.create(createProvinsiDto);
+    async findAll() {
+        return this.provinsiService.findAll().catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findAll() {
-        return this.provinsiService.findAll();
+    async search(search) {
+        return this.provinsiService.findAllBySearch(search).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findOne(id) {
+    async findOne(id) {
         return this.provinsiService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    update(id, updateProvinsiDto) {
+    async create(createProvinsiDto) {
+        return this.provinsiService.create(createProvinsiDto);
+    }
+    async update(id, updateProvinsiDto) {
         return this.provinsiService.update(id, updateProvinsiDto);
     }
-    remove(id) {
+    async remove(id) {
         return this.provinsiService.remove(id);
     }
 };
 exports.ProvinsiController = ProvinsiController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ProvinsiController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ProvinsiController.prototype, "search", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], ProvinsiController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_provinsi_dto_1.CreateProvinsiDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProvinsiController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], ProvinsiController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], ProvinsiController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
@@ -69,14 +83,14 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_provinsi_dto_1.UpdateProvinsiDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProvinsiController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProvinsiController.prototype, "remove", null);
 exports.ProvinsiController = ProvinsiController = __decorate([
     (0, swagger_1.ApiTags)('provinsi'),

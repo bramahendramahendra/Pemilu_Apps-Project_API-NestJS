@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Kabupaten } from './kabupaten.entity';
-import { QueryFailedError, Repository } from 'typeorm';
+import { ILike, QueryFailedError, Repository } from 'typeorm';
 import { CreateKabupatenDto } from './dto/create-kabupaten.dto';
 import { UpdateKabupatenDto } from './dto/update-kabupaten.dto';
 
@@ -13,13 +13,39 @@ export class KabupatenService {
     ) {}
 
     async findAll(): Promise<Kabupaten[]> {
-        return this.kabupatenRepository.find();
+        const kabupaten = await this.kabupatenRepository.find();
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new NotFoundException(`Kabupaten not found`);
+        }
+        return kabupaten;
     }
 
     async findOne(id: number): Promise<Kabupaten> {
         const kabupaten = await this.kabupatenRepository.findOneBy({ id });
-        if(!kabupaten) {
+        if (!kabupaten) {
             throw new NotFoundException(`Kabupaten with ID "${id}" not found`);
+        }
+        return kabupaten;
+    }
+
+    async findAllByProvinsi(id_provinsi: number): Promise<Kabupaten[]> {
+        const kabupaten = await this.kabupatenRepository.find({ 
+            where: { id_provinsi } 
+        });
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new NotFoundException(`Kabupaten with Provinsi ID "${id_provinsi}" not found`);
+        }
+        return kabupaten;
+    }
+
+    async findAllBySearch(search?: string): Promise<Kabupaten[]> {
+        const queryBuilder = this.kabupatenRepository.createQueryBuilder('kabupaten');
+        if (search) {
+            queryBuilder.andWhere('kabupaten.nama LIKE :search', { search: `%${search}%` });
+        }
+        const kabupaten = await queryBuilder.getMany();
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new NotFoundException(`Kabupaten not found`);
         }
         return kabupaten;
     }

@@ -68,6 +68,7 @@ __decorate([
         required: true
     }),
     (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(1),
     __metadata("design:type", Number)
 ], CreateKandidatDto.prototype, "id_partai", void 0);

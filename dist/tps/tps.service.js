@@ -22,12 +22,36 @@ let TpsService = class TpsService {
         this.tpsRepository = tpsRepository;
     }
     async findAll() {
-        return this.tpsRepository.find();
+        const tps = await this.tpsRepository.find();
+        if (!tps || tps.length === 0) {
+            throw new common_1.NotFoundException(`TPS not found`);
+        }
+        return tps;
     }
     async findOne(id) {
         const tps = await this.tpsRepository.findOneBy({ id });
         if (!tps) {
-            throw new common_1.NotFoundException(`Tps with ID "${id}" not found`);
+            throw new common_1.NotFoundException(`TPS with ID "${id}" not found`);
+        }
+        return tps;
+    }
+    async findAllByKelurahan(id_kelurahan) {
+        const tps = await this.tpsRepository.find({
+            where: { id_kelurahan }
+        });
+        if (!tps || tps.length === 0) {
+            throw new common_1.NotFoundException(`TPS with Kelurahan ID "${id_kelurahan}" not found`);
+        }
+        return tps;
+    }
+    async findAllBySearch(search) {
+        const queryBuilder = this.tpsRepository.createQueryBuilder('tps');
+        if (search) {
+            queryBuilder.andWhere('tps.nama LIKE :search OR tps.alamat LIKE :search', { search: `%${search}%` });
+        }
+        const tps = await queryBuilder.getMany();
+        if (!tps || tps.length === 0) {
+            throw new common_1.NotFoundException(`TPS not found`);
         }
         return tps;
     }

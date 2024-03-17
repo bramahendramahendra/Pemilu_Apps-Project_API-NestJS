@@ -22,46 +22,72 @@ let KecamatanController = class KecamatanController {
     constructor(kecamatanService) {
         this.kecamatanService = kecamatanService;
     }
-    create(createKecamatanDto) {
-        return this.kecamatanService.create(createKecamatanDto);
+    async findAll() {
+        return this.kecamatanService.findAll().catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findAll() {
-        return this.kecamatanService.findAll();
+    async search(search) {
+        return this.kecamatanService.findAllBySearch(search).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
     }
-    findOne(id) {
+    async findAllByKabupaten(id_kabupaten) {
+        return this.kecamatanService.findAllByKabupaten(id_kabupaten).catch((e) => {
+            throw new common_1.NotFoundException(e.message);
+        });
+    }
+    async findOne(id) {
         return this.kecamatanService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    update(id, updateKecamatanDto) {
+    async create(createKecamatanDto) {
+        return this.kecamatanService.create(createKecamatanDto);
+    }
+    async update(id, updateKecamatanDto) {
         return this.kecamatanService.update(id, updateKecamatanDto);
     }
-    remove(id) {
+    async remove(id) {
         return this.kecamatanService.remove(id);
     }
 };
 exports.KecamatanController = KecamatanController;
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], KecamatanController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('search'),
+    __param(0, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], KecamatanController.prototype, "search", null);
+__decorate([
+    (0, common_1.Get)('by-kabupaten/:id_kabupaten'),
+    __param(0, (0, common_1.Param)('id_kabupaten')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KecamatanController.prototype, "findAllByKabupaten", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], KecamatanController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_kecamatan_dto_1.CreateKecamatanDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KecamatanController.prototype, "create", null);
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], KecamatanController.prototype, "findAll", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], KecamatanController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
@@ -69,14 +95,14 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_kecamatan_dto_1.UpdateKecamatanDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KecamatanController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], KecamatanController.prototype, "remove", null);
 exports.KecamatanController = KecamatanController = __decorate([
     (0, swagger_1.ApiTags)('kecamatan'),

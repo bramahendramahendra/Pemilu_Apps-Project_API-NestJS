@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, MaxLength } from 'class-validator';
+import { IsInt, IsNumber, IsString, Length, MaxLength, Min } from 'class-validator';
 
 export class CreateTpsDto {
     @ApiProperty({ 
@@ -10,6 +10,15 @@ export class CreateTpsDto {
     @Length(1, 25)
     @MaxLength(25)
     nama: string;
+
+    @ApiProperty({
+        example: 1,
+        required: true
+    })
+    @IsInt()
+    @IsNumber()
+    @Min(1)
+    id_kelurahan: number;
 
     @ApiProperty({ 
         example: 'Jl.Harsono RM No.1',

@@ -9,22 +9,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTpsDto = void 0;
+exports.UpdateSaksiDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
-const create_saksi_dto_1 = require("./create-saksi.dto");
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
-class UpdateTpsDto extends (0, mapped_types_1.PartialType)(create_saksi_dto_1.CreateTpsDto) {
+const create_saksi_dto_1 = require("./create-saksi.dto");
+class UpdateSaksiDto extends (0, mapped_types_1.PartialType)(create_saksi_dto_1.CreateSaksiDto) {
 }
-exports.UpdateTpsDto = UpdateTpsDto;
+exports.UpdateSaksiDto = UpdateSaksiDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'TPS 01' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'John Doe',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "nama", void 0);
+], UpdateSaksiDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jl.Harsono RM No.1' }),
+    (0, swagger_1.ApiProperty)({
+        example: '+621234567890',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.Length)(1, 15),
+    (0, class_validator_1.MaxLength)(15),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "alamat", void 0);
+], UpdateSaksiDto.prototype, "kontak", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdateSaksiDto.prototype, "id_tps", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdateSaksiDto.prototype, "id_kandidat", void 0);
 //# sourceMappingURL=update-saksi.dto.js.map

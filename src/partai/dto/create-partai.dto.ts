@@ -1,14 +1,46 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, MaxLength } from 'class-validator';
+import { IsNumber, IsOptional, IsString, Length, MaxLength } from 'class-validator';
 
-export class CreateTpsDto {
-    @ApiProperty({ example: 'TPS 01' })
+export class CreatePartaiDto {
+    @ApiProperty({ 
+        example: 'Partai XYZ', 
+        required: true 
+    })
     @IsString()
     @Length(1, 25)
     @MaxLength(25)
     nama: string;
 
-    @ApiProperty({ example: 'Jl.Harsono RM No.1' })
+    @ApiProperty({ 
+        example: 'https://example.com/logo.jpg', 
+        required: false 
+    })
     @IsString()
-    alamat: string;
+    @IsOptional()
+    logo?: string;
+
+    @ApiProperty({ 
+        example: 'image/jpeg', 
+        required: false 
+    })
+    @IsString()
+    @IsOptional()
+    @MaxLength(191)
+    logo_mime?: string;
+
+    @ApiProperty({ 
+        example: 2048, 
+        required: false 
+    })
+    @IsNumber()
+    @IsOptional()
+    logo_size?: number;
+
+    @ApiProperty({ 
+        example: 'Description of the party', 
+        required: false 
+    })
+    @IsString()
+    @IsOptional()
+    deskripsi?: string;
 }

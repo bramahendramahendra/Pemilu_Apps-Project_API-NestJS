@@ -9,22 +9,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateTpsDto = void 0;
+exports.CreateSaksiDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateTpsDto {
+class CreateSaksiDto {
 }
-exports.CreateTpsDto = CreateTpsDto;
+exports.CreateSaksiDto = CreateSaksiDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'TPS 01' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'John Doe',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 25),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)
-], CreateTpsDto.prototype, "nama", void 0);
+], CreateSaksiDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jl.Harsono RM No.1' }),
+    (0, swagger_1.ApiProperty)({
+        example: '+621234567890',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(15),
     __metadata("design:type", String)
-], CreateTpsDto.prototype, "alamat", void 0);
+], CreateSaksiDto.prototype, "kontak", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: true
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateSaksiDto.prototype, "id_tps", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: true
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateSaksiDto.prototype, "id_kandidat", void 0);
 //# sourceMappingURL=create-saksi.dto.js.map

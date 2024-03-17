@@ -10,11 +10,14 @@ exports.PartaiModule = void 0;
 const common_1 = require("@nestjs/common");
 const partai_controller_1 = require("./partai.controller");
 const partai_service_1 = require("./partai.service");
+const typeorm_1 = require("@nestjs/typeorm");
+const partai_entity_1 = require("./partai.entity");
 let PartaiModule = class PartaiModule {
 };
 exports.PartaiModule = PartaiModule;
 exports.PartaiModule = PartaiModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([partai_entity_1.Partai])],
         controllers: [partai_controller_1.PartaiController],
         providers: [partai_service_1.PartaiService]
     })

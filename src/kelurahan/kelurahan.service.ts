@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateKelurahanDto } from './dto/create-kelurahan.dto';
 import { Kelurahan } from './kelurahan.entity';
-import { QueryFailedError, Repository } from 'typeorm';
+import { ILike, QueryFailedError, Repository } from 'typeorm';
 import { UpdateKelurahanDto } from './dto/update-kelurahan.dto';
 
 @Injectable()
@@ -13,13 +13,39 @@ export class KelurahanService {
     ) { }
 
     async findAll(): Promise<Kelurahan[]> {
-        return this.kelurahanRepository.find();
+        const kelurahan = await this.kelurahanRepository.find();
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new NotFoundException(`Kelurahan not found`);
+        }
+        return kelurahan;
     }
 
     async findOne(id: number): Promise<Kelurahan> {
         const kelurahan = await this.kelurahanRepository.findOneBy({ id });
         if (!kelurahan) {
             throw new NotFoundException(`Kelurahan with ID "${id}" not found`);
+        }
+        return kelurahan;
+    }
+
+    async findAllByKecamatan(id_kecamatan: number): Promise<Kelurahan[]> {
+        const kelurahan = await this.kelurahanRepository.find({
+            where: { id_kecamatan }
+        });
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new NotFoundException(`Kelurahan with Kecamatan ID "${id_kecamatan}" not found`);
+        }
+        return kelurahan;
+    }
+
+    async findAllBySearch(search: string): Promise<Kelurahan[]> {
+        const queryBuilder = this.kelurahanRepository.createQueryBuilder('kelurahan');
+        if (search) {
+            queryBuilder.andWhere('kelurahan.nama LIKE :search', { search: `%${search}%` });
+        }
+        const kelurahan = await queryBuilder.getMany();
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new NotFoundException(`Kelurahan not found`);
         }
         return kelurahan;
     }

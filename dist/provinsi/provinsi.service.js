@@ -31,6 +31,17 @@ let ProvinsiService = class ProvinsiService {
         }
         return provinsi;
     }
+    async findAllBySearch(search) {
+        const queryBuilder = this.provinsiRepository.createQueryBuilder('provinsi');
+        if (search) {
+            queryBuilder.andWhere('provinsi.nama LIKE :search', { search: `%${search}%` });
+        }
+        const provinsi = await queryBuilder.getMany();
+        if (!provinsi || provinsi.length === 0) {
+            throw new common_1.NotFoundException(`Provinsi not found`);
+        }
+        return provinsi;
+    }
     async create(createProvinsiDto) {
         const existing = await this.provinsiRepository.findOne({
             where: { nama: createProvinsiDto.nama },

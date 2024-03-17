@@ -9,22 +9,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateTpsDto = void 0;
+exports.UpdatePartaiDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
-const create_partai_dto_1 = require("./create-partai.dto");
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
-class UpdateTpsDto extends (0, mapped_types_1.PartialType)(create_partai_dto_1.CreateTpsDto) {
+const create_partai_dto_1 = require("./create-partai.dto");
+class UpdatePartaiDto extends (0, mapped_types_1.PartialType)(create_partai_dto_1.CreatePartaiDto) {
 }
-exports.UpdateTpsDto = UpdateTpsDto;
+exports.UpdatePartaiDto = UpdatePartaiDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'TPS 01' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Partai XYZ',
+        required: true
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(25),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "nama", void 0);
+], UpdatePartaiDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jl.Harsono RM No.1' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'https://example.com/logo.jpg',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], UpdateTpsDto.prototype, "alamat", void 0);
+], UpdatePartaiDto.prototype, "logo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'image/jpeg',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.MaxLength)(191),
+    __metadata("design:type", String)
+], UpdatePartaiDto.prototype, "logo_mime", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 2048,
+        required: false
+    }),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdatePartaiDto.prototype, "logo_size", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'Description of the party',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], UpdatePartaiDto.prototype, "deskripsi", void 0);
 //# sourceMappingURL=update-partai.dto.js.map

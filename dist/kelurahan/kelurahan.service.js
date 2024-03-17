@@ -22,12 +22,36 @@ let KelurahanService = class KelurahanService {
         this.kelurahanRepository = kelurahanRepository;
     }
     async findAll() {
-        return this.kelurahanRepository.find();
+        const kelurahan = await this.kelurahanRepository.find();
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new common_1.NotFoundException(`Kelurahan not found`);
+        }
+        return kelurahan;
     }
     async findOne(id) {
         const kelurahan = await this.kelurahanRepository.findOneBy({ id });
         if (!kelurahan) {
             throw new common_1.NotFoundException(`Kelurahan with ID "${id}" not found`);
+        }
+        return kelurahan;
+    }
+    async findAllByKecamatan(id_kecamatan) {
+        const kelurahan = await this.kelurahanRepository.find({
+            where: { id_kecamatan }
+        });
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new common_1.NotFoundException(`Kelurahan with Kecamatan ID "${id_kecamatan}" not found`);
+        }
+        return kelurahan;
+    }
+    async findAllBySearch(search) {
+        const queryBuilder = this.kelurahanRepository.createQueryBuilder('kelurahan');
+        if (search) {
+            queryBuilder.andWhere('kelurahan.nama LIKE :search', { search: `%${search}%` });
+        }
+        const kelurahan = await queryBuilder.getMany();
+        if (!kelurahan || kelurahan.length === 0) {
+            throw new common_1.NotFoundException(`Kelurahan not found`);
         }
         return kelurahan;
     }

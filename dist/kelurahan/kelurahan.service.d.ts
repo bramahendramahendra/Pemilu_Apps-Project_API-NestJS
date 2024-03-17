@@ -7,6 +7,8 @@ export declare class KelurahanService {
     constructor(kelurahanRepository: Repository<Kelurahan>);
     findAll(): Promise<Kelurahan[]>;
     findOne(id: number): Promise<Kelurahan>;
+    findAllByKecamatan(id_kecamatan: number): Promise<Kelurahan[]>;
+    findAllBySearch(search: string): Promise<Kelurahan[]>;
     create(createKelurahanDto: CreateKelurahanDto): Promise<Kelurahan>;
     update(id: number, updateKelurahanDto: UpdateKelurahanDto): Promise<Kelurahan>;
     remove(id: number): Promise<void>;

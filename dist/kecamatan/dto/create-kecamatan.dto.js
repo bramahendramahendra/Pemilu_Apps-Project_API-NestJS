@@ -16,10 +16,23 @@ class CreateKecamatanDto {
 }
 exports.CreateKecamatanDto = CreateKecamatanDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Pasar Minggu' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Pasar Minggu',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.Length)(1, 25),
     (0, class_validator_1.MaxLength)(25),
     __metadata("design:type", String)
 ], CreateKecamatanDto.prototype, "nama", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: true
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    __metadata("design:type", Number)
+], CreateKecamatanDto.prototype, "id_kabupaten", void 0);
 //# sourceMappingURL=create-kecamatan.dto.js.map

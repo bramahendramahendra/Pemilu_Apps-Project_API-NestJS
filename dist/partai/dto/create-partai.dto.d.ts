@@ -1,4 +1,7 @@
-export declare class CreateTpsDto {
+export declare class CreatePartaiDto {
     nama: string;
-    alamat: string;
+    logo?: string;
+    logo_mime?: string;
+    logo_size?: number;
+    deskripsi?: string;
 }

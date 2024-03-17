@@ -22,12 +22,36 @@ let KabupatenService = class KabupatenService {
         this.kabupatenRepository = kabupatenRepository;
     }
     async findAll() {
-        return this.kabupatenRepository.find();
+        const kabupaten = await this.kabupatenRepository.find();
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new common_1.NotFoundException(`Kabupaten not found`);
+        }
+        return kabupaten;
     }
     async findOne(id) {
         const kabupaten = await this.kabupatenRepository.findOneBy({ id });
         if (!kabupaten) {
             throw new common_1.NotFoundException(`Kabupaten with ID "${id}" not found`);
+        }
+        return kabupaten;
+    }
+    async findAllByProvinsi(id_provinsi) {
+        const kabupaten = await this.kabupatenRepository.find({
+            where: { id_provinsi }
+        });
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new common_1.NotFoundException(`Kabupaten with Provinsi ID "${id_provinsi}" not found`);
+        }
+        return kabupaten;
+    }
+    async findAllBySearch(search) {
+        const queryBuilder = this.kabupatenRepository.createQueryBuilder('kabupaten');
+        if (search) {
+            queryBuilder.andWhere('kabupaten.nama LIKE :search', { search: `%${search}%` });
+        }
+        const kabupaten = await queryBuilder.getMany();
+        if (!kabupaten || kabupaten.length === 0) {
+            throw new common_1.NotFoundException(`Kabupaten not found`);
         }
         return kabupaten;
     }

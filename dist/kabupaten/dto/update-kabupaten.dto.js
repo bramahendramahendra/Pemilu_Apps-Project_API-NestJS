@@ -18,8 +18,25 @@ class UpdateKabupatenDto extends (0, mapped_types_1.PartialType)(create_kabupate
 }
 exports.UpdateKabupatenDto = UpdateKabupatenDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jakarta Selatan' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'Jakarta Selatan',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(25),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateKabupatenDto.prototype, "nama", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdateKabupatenDto.prototype, "id_provinsi", void 0);
 //# sourceMappingURL=update-kabupaten.dto.js.map

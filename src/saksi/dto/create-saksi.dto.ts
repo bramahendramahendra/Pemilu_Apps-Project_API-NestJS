@@ -1,14 +1,40 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, Length, MaxLength } from 'class-validator';
+import { IsInt, IsNumber, IsString, Length, MaxLength, Min } from 'class-validator';
 
-export class CreateTpsDto {
-    @ApiProperty({ example: 'TPS 01' })
+export class CreateSaksiDto {
+    @ApiProperty({ 
+        example: 'John Doe',
+        required: true
+    })
     @IsString()
     @Length(1, 25)
     @MaxLength(25)
     nama: string;
 
-    @ApiProperty({ example: 'Jl.Harsono RM No.1' })
+    @ApiProperty({ 
+        example: '+621234567890', 
+        required: true 
+    })
     @IsString()
-    alamat: string;
+    @Length(1, 25)
+    @MaxLength(15)
+    kontak: string;
+
+    @ApiProperty({ 
+        example: 1,
+        required: true
+    })
+    @IsInt()
+    @IsNumber()
+    @Min(1)
+    id_tps: number;
+
+    @ApiProperty({
+        example: 1,
+        required: true 
+    })
+    @IsInt()
+    @IsNumber()
+    @Min(1)
+    id_kandidat: number;
 }

@@ -7,6 +7,7 @@ export declare class ProvinsiService {
     constructor(provinsiRepository: Repository<Provinsi>);
     findAll(): Promise<Provinsi[]>;
     findOne(id: number): Promise<Provinsi>;
+    findAllBySearch(search?: string): Promise<Provinsi[]>;
     create(createProvinsiDto: CreateProvinsiDto): Promise<Provinsi>;
     update(id: number, updateProvinsiDto: UpdateProvinsiDto): Promise<Provinsi>;
     remove(id: number): Promise<void>;

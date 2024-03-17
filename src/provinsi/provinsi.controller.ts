@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProvinsiService } from './provinsi.service';
 import { CreateProvinsiDto } from './dto/create-provinsi.dto';
 import { UpdateProvinsiDto } from './dto/update-provinsi.dto';
@@ -9,32 +9,41 @@ import { ApiTags } from '@nestjs/swagger';
 export class ProvinsiController {
     constructor(private readonly provinsiService: ProvinsiService) { }
 
-    @Post()
-    @UsePipes(new ValidationPipe({ transform: true }))
-    create(@Body() createProvinsiDto: CreateProvinsiDto) {
-        return this.provinsiService.create(createProvinsiDto);
+    @Get()
+    async findAll() {
+        return this.provinsiService.findAll().catch((e) => {
+            throw new NotFoundException(e.message);
+        });
     }
 
-    @Get()
-    findAll() {
-        return this.provinsiService.findAll();
+    @Get('search')
+    async search(@Query('search') search: string ) {
+        return this.provinsiService.findAllBySearch(search).catch((e) => {
+            throw new NotFoundException(e.message);
+        });
     }
 
     @Get(':id')
-    findOne(@Param('id') id: number) {
+    async findOne(@Param('id') id: number) {
         return this.provinsiService.findOne(id).catch((e) => {
             throw new NotFoundException(e.message);
         });
     }
 
+    @Post()
+    @UsePipes(new ValidationPipe({ transform: true }))
+    async create(@Body() createProvinsiDto: CreateProvinsiDto) {
+        return this.provinsiService.create(createProvinsiDto);
+    }
+
     @Patch(':id')
     @UsePipes(new ValidationPipe({ transform: true }))
-    update(@Param('id') id: number, @Body() updateProvinsiDto: UpdateProvinsiDto) {
+    async update(@Param('id') id: number, @Body() updateProvinsiDto: UpdateProvinsiDto) {
         return this.provinsiService.update(id, updateProvinsiDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: number) {
+    async remove(@Param('id') id: number) {
         return this.provinsiService.remove(id);
     }
 }

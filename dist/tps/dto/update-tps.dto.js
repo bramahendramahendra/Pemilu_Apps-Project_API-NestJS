@@ -18,13 +18,34 @@ class UpdateTpsDto extends (0, mapped_types_1.PartialType)(create_tps_dto_1.Crea
 }
 exports.UpdateTpsDto = UpdateTpsDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'TPS 01' }),
+    (0, swagger_1.ApiProperty)({
+        example: 'TPS 01',
+        required: false
+    }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(1, 25),
+    (0, class_validator_1.MaxLength)(25),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "nama", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'Jl.Harsono RM No.1' }),
+    (0, swagger_1.ApiProperty)({
+        example: 1,
+        required: false
+    }),
+    (0, class_validator_1.IsInt)(),
+    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.Min)(1),
     (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Number)
+], UpdateTpsDto.prototype, "id_kelurahan", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: 'Jl.Harsono RM No.1',
+        required: false
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateTpsDto.prototype, "alamat", void 0);
 //# sourceMappingURL=update-tps.dto.js.map

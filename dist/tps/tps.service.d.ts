@@ -7,6 +7,8 @@ export declare class TpsService {
     constructor(tpsRepository: Repository<TPS>);
     findAll(): Promise<TPS[]>;
     findOne(id: number): Promise<TPS>;
+    findAllByKelurahan(id_kelurahan: number): Promise<TPS[]>;
+    findAllBySearch(search: string): Promise<TPS[]>;
     create(createTpsDto: CreateTpsDto): Promise<TPS>;
     update(id: number, updateTpsDto: UpdateTpsDto): Promise<TPS>;
     remove(id: number): Promise<void>;

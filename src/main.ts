@@ -4,7 +4,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AnyExceptionFilter } from './common/filters/any-exception.filter';
-import { useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,15 +15,6 @@ async function bootstrap() {
     // .addTag()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  // const customOptions = {
-  //   // customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css',
-  //   // customJs: 'https://petstore.swagger.io/swagger-ui-bundle.js',
-  //   // customJsUrl: 'https://petstore.swagger.io/swagger-ui-standalone-preset.js',
-  //   // customJs: 'https://petstore.swagger.io/swagger-initializer.js',
-  //   // customCssUrl5: 'https://petstore.swagger.io/index.css',
-  //   // customCssUrl6: 'https://petstore.swagger.io/swagger-ui.css',
-  // };
-  // SwaggerModule.setup('api', app, document, customOptions);
 
   SwaggerModule.setup('api', app, document, {
     customSiteTitle: 'Pilkada API',
@@ -40,15 +30,6 @@ async function bootstrap() {
     ],
   });
 
-  // const cors = { ...CorsConfig };
-  // app.enableCors(cors);
-  // app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  // app.setGlobalPrefix('api/v1');
-  // useContainer(app.select(AppModule), { fallbackOnErrors: true });
-
-  
-  // const cors = { ...CorsConfig };
-  // app.enableCors(cors);
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
@@ -62,10 +43,7 @@ async function bootstrap() {
   }));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new AnyExceptionFilter());
-  // app.setGlobalPrefix('api');
-  // useContainer(app.select(AppModule), { fallbackOnErrors: true });
-
-
+  
   await app.listen(3000);
 }
 bootstrap();

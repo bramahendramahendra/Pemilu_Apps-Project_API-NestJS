@@ -10,11 +10,14 @@ exports.KandidatModule = void 0;
 const common_1 = require("@nestjs/common");
 const kandidat_controller_1 = require("./kandidat.controller");
 const kandidat_service_1 = require("./kandidat.service");
+const typeorm_1 = require("@nestjs/typeorm");
+const kandidat_entity_1 = require("./kandidat.entity");
 let KandidatModule = class KandidatModule {
 };
 exports.KandidatModule = KandidatModule;
 exports.KandidatModule = KandidatModule = __decorate([
     (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([kandidat_entity_1.Kandidat])],
         controllers: [kandidat_controller_1.KandidatController],
         providers: [kandidat_service_1.KandidatService]
     })

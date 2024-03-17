@@ -1,4 +1,6 @@
-export declare class CreateTpsDto {
+export declare class CreateSaksiDto {
     nama: string;
-    alamat: string;
+    kontak: string;
+    id_tps: number;
+    id_kandidat: number;
 }
