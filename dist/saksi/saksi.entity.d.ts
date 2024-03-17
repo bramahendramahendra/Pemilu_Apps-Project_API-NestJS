@@ -4,8 +4,8 @@ export declare class Saksi {
     id: number;
     nama: string;
     kontak: string;
-    id_tps: TPS;
-    id_kandidat: Kandidat;
+    id_tps: number;
+    id_kandidat: number;
     created_at: Date;
     updated_at: Date;
     tps: TPS;

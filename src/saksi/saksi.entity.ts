@@ -34,13 +34,13 @@ export class Saksi {
         type: 'int',
         unsigned: true
     })
-    id_tps: TPS;
+    id_tps: number;
 
     @Column({
         type: 'int',
         unsigned: true
     })
-    id_kandidat: Kandidat;
+    id_kandidat: number;
 
     @CreateDateColumn({ 
         type: 'timestamp',
@@ -59,11 +59,11 @@ export class Saksi {
     })
     updated_at: Date;
 
-    @ManyToOne(() => TPS, (tps) => tps.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
+    @ManyToOne(() => TPS, tps => tps.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
     @JoinColumn({ name: 'id_tps' })
     tps: TPS;
 
-    @ManyToOne(() => Kandidat, (kandidat) => kandidat.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
+    @ManyToOne(() => Kandidat, kandidat => kandidat.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' })
     @JoinColumn({ name: 'id_kandidat' })
     kandidat: Kandidat;
 }

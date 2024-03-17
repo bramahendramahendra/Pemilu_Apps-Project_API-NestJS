@@ -4,7 +4,6 @@ import { KandidatService } from './kandidat.service';
 import { CreateKandidatDto } from './dto/create-kandidat.dto';
 import { UpdateKandidatDto } from './dto/update-kandidat.dto';
 
-
 @ApiTags('kandidat')
 @Controller('kandidat')
 export class KandidatController {

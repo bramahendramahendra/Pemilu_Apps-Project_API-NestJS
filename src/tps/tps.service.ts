@@ -52,7 +52,10 @@ export class TpsService {
 
     async create(createTpsDto: CreateTpsDto): Promise<TPS> {
         const existing = await this.tpsRepository.findOne({
-            where: { nama: createTpsDto.nama },
+            where: { 
+                nama: createTpsDto.nama,
+                id_kelurahan: createTpsDto.id_kelurahan,
+             },
         });
         if (existing) {
             throw new Error('Tps name already exists');

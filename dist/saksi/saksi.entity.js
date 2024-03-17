@@ -49,14 +49,14 @@ __decorate([
         type: 'int',
         unsigned: true
     }),
-    __metadata("design:type", tps_entity_1.TPS)
+    __metadata("design:type", Number)
 ], Saksi.prototype, "id_tps", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'int',
         unsigned: true
     }),
-    __metadata("design:type", kandidat_entity_1.Kandidat)
+    __metadata("design:type", Number)
 ], Saksi.prototype, "id_kandidat", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({
@@ -78,12 +78,12 @@ __decorate([
     __metadata("design:type", Date)
 ], Saksi.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => tps_entity_1.TPS, (tps) => tps.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
+    (0, typeorm_1.ManyToOne)(() => tps_entity_1.TPS, tps => tps.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
     (0, typeorm_1.JoinColumn)({ name: 'id_tps' }),
     __metadata("design:type", tps_entity_1.TPS)
 ], Saksi.prototype, "tps", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => kandidat_entity_1.Kandidat, (kandidat) => kandidat.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
+    (0, typeorm_1.ManyToOne)(() => kandidat_entity_1.Kandidat, kandidat => kandidat.id, { onDelete: 'RESTRICT', onUpdate: 'RESTRICT' }),
     (0, typeorm_1.JoinColumn)({ name: 'id_kandidat' }),
     __metadata("design:type", kandidat_entity_1.Kandidat)
 ], Saksi.prototype, "kandidat", void 0);
