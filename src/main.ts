@@ -8,6 +8,7 @@ import { AnyExceptionFilter } from './common/filters/any-exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Setup Swagger
   const config = new DocumentBuilder()
     .setTitle('Pilkada')
     .setDescription('API Pilkada')
@@ -30,20 +31,26 @@ async function bootstrap() {
     ],
   });
 
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    exceptionFactory: (errors) => {
-      const messages = errors.map(
-        (error) => `${error.property} has wrong value ${error.value}, ${Object.values(error.constraints).join(', ')}`
-      );
-      return new Error(messages.join('; '));
-    },
-  }));
-  app.useGlobalInterceptors(new ResponseInterceptor());
-  app.useGlobalFilters(new AnyExceptionFilter());
-  
+  // Use global pipes
+  // app.useGlobalPipes(new ValidationPipe({
+  //   transform: true,
+  //   whitelist: true,
+  //   forbidNonWhitelisted: true,
+  //   exceptionFactory: (errors) => {
+  //     const messages = errors.map(
+  //       (error) => `${error.property} has wrong value ${error.value}, ${Object.values(error.constraints).join(', ')}`
+  //     );
+  //     return new Error(messages.join('; '));
+  //   },
+  // }));
+
+  // Global interceptors and filters
+  // app.useGlobalInterceptors(new ResponseInterceptor());
+  // app.useGlobalFilters(new AnyExceptionFilter());
+
+  // Enable CORS if needed
+  app.enableCors(); // Enable CORS if needed
+
   await app.listen(3000);
 }
 bootstrap();

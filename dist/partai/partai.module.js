@@ -12,12 +12,17 @@ const partai_controller_1 = require("./partai.controller");
 const partai_service_1 = require("./partai.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const partai_entity_1 = require("./partai.entity");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_config_1 = require("../config/multer.config");
 let PartaiModule = class PartaiModule {
 };
 exports.PartaiModule = PartaiModule;
 exports.PartaiModule = PartaiModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([partai_entity_1.Partai])],
+        imports: [
+            platform_express_1.MulterModule.register(multer_config_1.multerConfig),
+            typeorm_1.TypeOrmModule.forFeature([partai_entity_1.Partai])
+        ],
         controllers: [partai_controller_1.PartaiController],
         providers: [partai_service_1.PartaiService]
     })

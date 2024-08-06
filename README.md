@@ -85,7 +85,7 @@ npm i --save @nestjs/config
 nest g module [name_file]
 ```
 
-## install module :
+## install controller :
 
 ```bash
 # with spec
@@ -94,7 +94,7 @@ nest g controller [name_file]
 nest g controller [name_file] --no-spec
 ```
 
-## install module :
+## install service :
 
 ```bash
 # with spec
@@ -108,17 +108,30 @@ nest g service [name_file] --no-spec
 npm install --save @nestjs/typeorm typeorm mysql2
 ```
 
+# Install lib DTO
+
 ## install Validation :
 ```bash
 npm i --save class-validator class-transformer
 ```
 
-## install Validation :
+## install mapping type :
 ```bash
 npm install --save @nestjs/mapped-types
 ```
 
+# Install Upload Files
 
+## install serve-static :
+```bash
+npm install --save @nestjs/serve-static
+
+```
+## install serve-static :
+```bash
+ npm i -D @types/multer
+
+```
 
 # Install Support
 
@@ -130,6 +143,11 @@ npm install --save @nestjs/swagger
 ## install Prisma :
 ```bash
  npm install prisma --save-dev
+```
+
+## install Google Cloud Platform :
+```bash
+ npm install @google-cloud/storage
 ```
 
 # Production

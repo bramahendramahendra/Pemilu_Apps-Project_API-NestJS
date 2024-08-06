@@ -11,15 +11,21 @@ import { TpsModule } from './tps/tps.module';
 import { KandidatModule } from './kandidat/kandidat.module';
 import { PartaiModule } from './partai/partai.module';
 import { SaksiModule } from './saksi/saksi.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { MulterModule } from '@nestjs/platform-express';
+import { multerConfig } from './config/multer.config';
 
 
 @Module({
   imports: [
+    // config 
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true,
     }),
-    // console.log(process.env.DB_USERNAME),
+    
+    // databse 
     TypeOrmModule.forRoot({
       type: process.env.DB_TYPE as 'mysql',
       host: process.env.DB_HOST,
@@ -30,6 +36,16 @@ import { SaksiModule } from './saksi/saksi.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: process.env.DB_SYNCHRONIZE === 'true',
     }), 
+
+    // MulterModule.register(multerConfig),
+
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'uploads'),
+    //   serveRoot: '/uploads',
+    // }),
+
+
+    // module 
     ProvinsiModule, KabupatenModule, KecamatanModule, KelurahanModule, TpsModule, KandidatModule, PartaiModule, SaksiModule
   ],
   controllers: [AppController],

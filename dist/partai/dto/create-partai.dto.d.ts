@@ -1,7 +1,5 @@
 export declare class CreatePartaiDto {
     nama: string;
-    logo?: string;
-    logo_mime?: string;
-    logo_size?: number;
+    logo?: any;
     deskripsi?: string;
 }

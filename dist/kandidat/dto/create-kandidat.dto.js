@@ -27,34 +27,6 @@ __decorate([
 ], CreateKandidatDto.prototype, "nama", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        example: 'https://example.com/photo.jpg',
-        required: false
-    }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateKandidatDto.prototype, "foto", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: 'image/jpeg',
-        required: false
-    }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.MaxLength)(191),
-    __metadata("design:type", String)
-], CreateKandidatDto.prototype, "foto_mime", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: 2048,
-        required: false
-    }),
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Number)
-], CreateKandidatDto.prototype, "foto_size", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
         example: 'Biography of the candidate',
         required: false
     }),

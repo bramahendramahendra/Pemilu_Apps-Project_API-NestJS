@@ -18,33 +18,34 @@ const swagger_1 = require("@nestjs/swagger");
 const partai_service_1 = require("./partai.service");
 const create_partai_dto_1 = require("./dto/create-partai.dto");
 const update_partai_dto_1 = require("./dto/update-partai.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let PartaiController = class PartaiController {
-    constructor(PartaiService) {
-        this.PartaiService = PartaiService;
+    constructor(partaiService) {
+        this.partaiService = partaiService;
     }
     async findAll() {
-        return this.PartaiService.findAll().catch((e) => {
+        return this.partaiService.findAll().catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
     async search(search) {
-        return this.PartaiService.findAllBySearch(search).catch((e) => {
+        return this.partaiService.findAllBySearch(search).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
     async findOne(id) {
-        return this.PartaiService.findOne(id).catch((e) => {
+        return this.partaiService.findOne(id).catch((e) => {
             throw new common_1.NotFoundException(e.message);
         });
     }
-    async create(createPartaiDto) {
-        return this.PartaiService.create(createPartaiDto);
+    async create(file, createPartaiDto) {
+        return this.partaiService.create(createPartaiDto, file);
     }
-    async update(id, updatePartaiDto) {
-        return this.PartaiService.update(id, updatePartaiDto);
+    async update(id, file, updatePartaiDto) {
+        return this.partaiService.update(id, updatePartaiDto, file);
     }
     async remove(id) {
-        return this.PartaiService.remove(id);
+        return this.partaiService.remove(id);
     }
 };
 exports.PartaiController = PartaiController;
@@ -71,18 +72,23 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('logo')),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_partai_dto_1.CreatePartaiDto]),
+    __metadata("design:paramtypes", [Object, create_partai_dto_1.CreatePartaiDto]),
     __metadata("design:returntype", Promise)
 ], PartaiController.prototype, "create", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('logo')),
     __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFile)()),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_partai_dto_1.UpdatePartaiDto]),
+    __metadata("design:paramtypes", [Number, Object, update_partai_dto_1.UpdatePartaiDto]),
     __metadata("design:returntype", Promise)
 ], PartaiController.prototype, "update", null);
 __decorate([

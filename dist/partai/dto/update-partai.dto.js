@@ -31,31 +31,13 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'https://example.com/logo.jpg',
-        required: false
+        required: false,
+        format: 'binary',
     }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], UpdatePartaiDto.prototype, "logo", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: 'image/jpeg',
-        required: false
-    }),
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.MaxLength)(191),
-    __metadata("design:type", String)
-], UpdatePartaiDto.prototype, "logo_mime", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        example: 2048,
-        required: false
-    }),
-    (0, class_validator_1.IsNumber)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", Number)
-], UpdatePartaiDto.prototype, "logo_size", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         example: 'Description of the party',

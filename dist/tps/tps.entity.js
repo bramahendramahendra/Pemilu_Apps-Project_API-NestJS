@@ -41,16 +41,6 @@ __decorate([
     __metadata("design:type", String)
 ], TPS.prototype, "nama", void 0);
 __decorate([
-    (0, typeorm_1.Column)({
-        type: 'text',
-        charset: 'utf8mb4',
-        collation: 'utf8mb4_unicode_ci',
-        nullable: true,
-        default: null
-    }),
-    __metadata("design:type", String)
-], TPS.prototype, "alamat", void 0);
-__decorate([
     (0, typeorm_1.CreateDateColumn)({
         type: 'timestamp',
         precision: 6,

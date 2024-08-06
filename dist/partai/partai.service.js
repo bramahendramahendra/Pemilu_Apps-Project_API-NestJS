@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const partai_entity_1 = require("./partai.entity");
 const typeorm_2 = require("typeorm");
+const gcloud_config_1 = require("../config/gcloud.config");
+const path_1 = require("path");
+const fs_1 = require("fs");
 let PartaiService = class PartaiService {
     constructor(partaiRepository) {
         this.partaiRepository = partaiRepository;
@@ -46,18 +49,29 @@ let PartaiService = class PartaiService {
         }
         return partai;
     }
-    async create(createPartaiDto) {
-        const existing = await this.partaiRepository.findOne({
-            where: { nama: createPartaiDto.nama },
-        });
-        if (existing) {
-            throw new Error('Partai name already exists');
+    async create(createPartaiDto, file) {
+        try {
+            const existing = await this.partaiRepository.findOne({
+                where: { nama: createPartaiDto.nama },
+            });
+            if (existing) {
+                throw new Error('Partai name already exists');
+            }
+            const partai = this.partaiRepository.create(createPartaiDto);
+            if (file) {
+                const fileUrl = await this.uploadFileToGCS(file);
+                partai.logo = fileUrl;
+                partai.logo_mime = file.mimetype;
+                partai.logo_size = file.size;
+            }
+            await this.partaiRepository.save(partai);
+            return partai;
         }
-        const partai = this.partaiRepository.create(createPartaiDto);
-        await this.partaiRepository.save(partai);
-        return partai;
+        catch (error) {
+            throw new Error(error.message);
+        }
     }
-    async update(id, updatePartaiDto) {
+    async update(id, updatePartaiDto, file) {
         const existing = await this.partaiRepository.findOne({
             where: { nama: updatePartaiDto.nama },
         });
@@ -66,6 +80,13 @@ let PartaiService = class PartaiService {
         }
         const partai = await this.findOne(id);
         Object.assign(partai, updatePartaiDto);
+        if (file) {
+            const fileUrl = await this.uploadFileToGCS(file);
+            console.log(fileUrl);
+            partai.logo = fileUrl;
+            partai.logo_mime = file.mimetype;
+            partai.logo_size = file.size;
+        }
         await this.partaiRepository.save(partai);
         return partai;
     }
@@ -79,6 +100,60 @@ let PartaiService = class PartaiService {
             }
             throw error;
         }
+    }
+    async uploadFileToGCS_1(file) {
+        const bucket = gcloud_config_1.storage.bucket(gcloud_config_1.bucketName);
+        const fileName = `${Date.now()}-${file.originalname}`;
+        const filePath = (0, path_1.join)(__dirname, '../../uploads', file.filename);
+        const fileUpload = bucket.file(fileName);
+        return new Promise((resolve, reject) => {
+            const blobStream = fileUpload.createWriteStream({
+                metadata: {
+                    contentType: file.mimetype,
+                },
+            });
+            blobStream.on('error', (error) => reject(error));
+            blobStream.on('finish', () => {
+                fileUpload.makePublic().then(() => {
+                    const publicUrl = `https://storage.googleapis.com/${gcloud_config_1.bucketName}/${fileName}`;
+                    resolve(publicUrl);
+                }).catch(reject);
+            });
+            const fileReadStream = (0, fs_1.createReadStream)(filePath);
+            fileReadStream.on('error', (error) => reject(error));
+            fileReadStream.pipe(blobStream);
+        });
+    }
+    async uploadFileToGCS(file) {
+        const bucket = gcloud_config_1.storage.bucket(gcloud_config_1.bucketName);
+        const fileName = `${Date.now()}-${file.originalname}`;
+        const fileUpload = bucket.file(fileName);
+        return new Promise((resolve, reject) => {
+            const blobStream = fileUpload.createWriteStream({
+                metadata: {
+                    contentType: file.mimetype,
+                },
+            });
+            blobStream.on('error', error => reject(error));
+            blobStream.on('finish', () => {
+                const options = {
+                    version: 'v4',
+                    action: 'read',
+                    expires: Date.now() + 15 * 60 * 1000,
+                };
+                fileUpload.getSignedUrl(options)
+                    .then(signedUrls => {
+                    resolve(signedUrls[0]);
+                })
+                    .catch(err => {
+                    console.error('Error creating signed URL:', err);
+                    reject(`Could not create signed URL: ${err.message}`);
+                });
+            });
+            const fileReadStream = (0, fs_1.createReadStream)((0, path_1.join)(__dirname, '../../uploads', file.filename));
+            fileReadStream.on('error', error => reject(error));
+            fileReadStream.pipe(blobStream);
+        });
     }
 };
 exports.PartaiService = PartaiService;

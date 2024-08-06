@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const kandidat_service_1 = require("./kandidat.service");
 const create_kandidat_dto_1 = require("./dto/create-kandidat.dto");
 const update_kandidat_dto_1 = require("./dto/update-kandidat.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let KandidatController = class KandidatController {
     constructor(KandidatService) {
         this.KandidatService = KandidatService;
@@ -83,6 +84,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('foto')),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_kandidat_dto_1.CreateKandidatDto]),

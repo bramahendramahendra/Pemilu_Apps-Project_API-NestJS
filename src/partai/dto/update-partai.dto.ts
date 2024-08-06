@@ -16,28 +16,12 @@ export class UpdatePartaiDto extends PartialType(CreatePartaiDto) {
 
     @ApiProperty({
         example: 'https://example.com/logo.jpg',
-        required: false
+        required: false,
+        format: 'binary',
     })
     @IsString()
     @IsOptional()
-    logo?: string;
-
-    @ApiProperty({
-        example: 'image/jpeg',
-        required: false
-    })
-    @IsString()
-    @IsOptional()
-    @MaxLength(191)
-    logo_mime?: string;
-
-    @ApiProperty({
-        example: 2048,
-        required: false
-    })
-    @IsNumber()
-    @IsOptional()
-    logo_size?: number;
+    logo?: any;
 
     @ApiProperty({
         example: 'Description of the party',

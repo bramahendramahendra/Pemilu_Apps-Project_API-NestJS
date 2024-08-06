@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "pilkada-cloud",
+  "private_key_id": "dd61ae12b7c8af3a7a9cf9057ce4c0242dd96bea",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCa6whwKNBbrBAw\nWNP/maxh/sgTmYStM8g1iktrRg4bM4KGURkTR089zgrcqVLFMDsBIYzPvqwsXhPh\nhG2LZb+4B/6feKI8/mM+tGHn+t9L4CqpsDJdgl3w83/PCFG24YxTxp506KUV+KTL\nnt7Hw2zjKAVgyysZAZdW6OPwHEzkKxTgh6dgcWsvMhQidN4UqqB5/hTCiLrnzM5F\nXeKnOhuGfbxTXNAgmo3om9rZFL9hLil1rRuS5MmdojhxMHx73lKEhQpS2UE4vnRT\nv23f5kLoXl2afgs5fYy97FyFsW7Xpwd6Hu713hgCHI+ek4Lcy+YH9Yn8mnE2BBKt\ndWejjq61AgMBAAECggEAHTIUOgcHFW+88U+cTHxqp2E71a3F+lpa7fQtOH9QY0H2\n5FdeUWrL/UraczGZ/r2TMShggDpf+lCUkJjDiFTZp9Yh3239rV8H1yZpmS2HbaZG\nhApHw6WxDJrnSF46ACxLpPI2pLO/gP+GFzXOqHklCT5enRpM+f55xhBH/NVojEtj\nHZP8mMZ9pFnof7NwASmSAqDon+wiFULiCC8Icrju8RIqV0shlaBEOnNS2bM2eaE7\nwnWJ86J7a2JmAylQR7EvJB7x8qL9NPpxyhf8S1nhDvltV3VDAIhWUa4NQ/qzlI6l\nECHTe8mej6yPCjYmHoJUdh52/moJ4jMSBexYC6XiAQKBgQDOFOCrH2j5oVpca72P\nHyr9PVWKGvPP3uNwjyh1fK20C7EDoYVeWYjE7jygdUFZo5SfALoZawLs981sDNcs\nH/pP9vDZ4qSFZuamW78uJA6s8ksWnCx0HcKXewVAxbOZB4rE8vnaM9pIGmGvwAc5\nABnqnbO/XdQsi5EoFVjgXIpLNQKBgQDAcYIWaqFhRBBI74e+9KMJMHOpYClIRxfv\nByA1pLoCvv1RYajU8OEJvDiGQCHobZQffaX/tNaLNsI3/szbr6jrqf5vSpvAHGJ+\ngsCrxugjYpJJRpoquxKtljfHfmlq9aR3Hfpe3XnjElejpCfr1Jo1cQlJg4nXuCvR\nY+RxDuPFgQKBgQCRMchxCHpPls0xXH97vPvu3C3OVdr91A3umg5paGSB+9LFuiFb\nLj3ccfWpH7PhUg0+UabMjcbL6nOC8zEO16DmgheDi9laW/uZrf5updzpIPSig3oW\nfXlCfNxgnGpDITs2M/KxN+NM9blpuCPelyGrWVzxMUxx7gthcFjkCo8tGQKBgE9I\ndEe39nSUDgF+bXaGYwTOKViGfXuBjqKzVNnE27114fc9PMk90/imysLEeTPAsV2n\n7lPCtQD1tl5LYyq+2+D7UA+ZtUEYcJueUrJyaADsA0idBbbFC5ToZmKR+exO90r7\n1sJujGC4ldKdNrU6Ca4qu6DFyGxPO/4wIVVSxRQBAoGAM5krb1P1AGktHSEYuY1h\nlFUzDFWQ8GxaAt7gagktZqZpELqfnHXJtks9UY6k1p5b+Ce3Xzaig6OnqRqnb8Cz\nZL9EGvKMvBMhjVUgaiu9aZ3c5rUVCzPthNlyAw5gFQ3q6GhwqV7YWK35Uln2TuoR\nAHj+r9323UsoB8xRoGpNlv8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pilkada-service@pilkada-cloud.iam.gserviceaccount.com",
+  "client_id": "115501491784854655850",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pilkada-service%40pilkada-cloud.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

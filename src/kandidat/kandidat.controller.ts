@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { KandidatService } from './kandidat.service';
 import { CreateKandidatDto } from './dto/create-kandidat.dto';
 import { UpdateKandidatDto } from './dto/update-kandidat.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('kandidat')
 @Controller('kandidat')
@@ -39,6 +40,7 @@ export class KandidatController {
 
     @Post()
     @UsePipes(new ValidationPipe({ transform: true }))
+    @UseInterceptors(FileInterceptor('foto'))
     async create(@Body() createKandidatDto: CreateKandidatDto) {
         return this.KandidatService.create(createKandidatDto);
     }
